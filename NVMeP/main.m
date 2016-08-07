@@ -365,7 +365,7 @@ void showHelp (NSArray *patches){
         printf("\t%lu for %s\n", (unsigned long)[patches indexOfObject:patch], patch.UTF8String);
     }
     printf("\n\te.g. NVMeP -s 0\n");
-    printf("\nNVMeP -k \"/path/to/IONVMEFamily.kext (/S/L/E/IONVMEFamily.kext by defaul)\".\n");
+    printf("\nNVMeP -k \"/path/to/IONVMEFamily.kext (/S/L/E/IONVMEFamily.kext by default)\".\n");
     printf("\nNVMeP -h \"show this message\".\n");
     printf("\nEasy ways w/o -s option:\n");
     printf("\tNVMeP\n");
