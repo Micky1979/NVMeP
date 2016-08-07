@@ -22,4 +22,4 @@ NVMeP -h "show this message".
 Easy ways w/o -s option:
 	NVMeP
 	NVMeP -i -k /User/Peter/Desktop/IONVMEFamily.kext
-	..will find a copantible patch (if any).
+	..will find a compatible patch (if any).

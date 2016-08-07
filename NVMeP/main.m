@@ -350,7 +350,7 @@ Creative Commons Notice
 #import "NVME.h"
 
 // -----------------------------------------------------
-#define cmdVersion @"1.0"
+#define cmdVersion @"1.1"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -370,7 +370,7 @@ void showHelp (NSArray *patches){
     printf("\nEasy ways w/o -s option:\n");
     printf("\tNVMeP\n");
     printf("\tNVMeP -i -k /User/Peter/Desktop/IONVMEFamily.kext\n");
-    printf("\t..will find a copantible patch (if any).\n");
+    printf("\t..will find a compatible patch (if any).\n");
     exit(1);
 }
 
