@@ -373,11 +373,9 @@ Creative Commons Notice
     // -----------------------------------------------------
     
     BOOL needPlistPatch = NO;
-    NSString *newKext, *currentDir, *tempKext, *configPath;
-    // kextPath = [@"/System/Library/Extensions" stringByAppendingPathComponent:kextName];
+    NSString *newKext, *currentDir, *configPath;
     
     currentDir = [fm currentDirectoryPath];
-    tempKext = [/*@"/private/tmp"*/currentDir stringByAppendingPathComponent:patchedKextName];
     newKext = [currentDir stringByAppendingPathComponent:patchedKextName];
     configPath = [currentDir stringByAppendingPathComponent:@"configSample.plist"];
     
@@ -406,62 +404,22 @@ Creative Commons Notice
         }
     }
     
-    if ([fm fileExistsAtPath:tempKext]) {
-        if (![fm removeItemAtPath:tempKext error:nil]) {
-            printf("Error: can't remove temporary file, please reboot and retry!\n");
-            exit(1);
-        }
-    }
-    
     // copy IONVMEFamily.kext
-    if (![fm copyItemAtPath:kextPath toPath:tempKext error:nil]) {
-        // NSFileManager hate to copying extended attributes...
-        // .. try with cp -RX
-        NSTask *cpTask;
-        NSPipe *cpPipe;
-        
-        @try
-        {
-            cpTask = [NSTask new];
-            [cpTask setLaunchPath:@"/bin/cp"];
-            [cpTask setArguments:[NSArray arrayWithObjects:@"-RX", kextPath, [[tempKext stringByDeletingLastPathComponent] stringByAppendingString:@"/"], nil]];
-            
-            
-            cpPipe                = [NSPipe new];
-            cpTask.standardOutput = cpPipe;
-            cpTask.standardError  = cpPipe;
-            
-            [cpTask launch];
-            [cpTask waitUntilExit];
-        }
-        @catch (NSException *exception)
-        {
-            NSLog(@"Problem Running copy task: %@", exception);
-        }
-        @finally
-        {
-            if (cpTask.terminationStatus > 0)
-            {
-                printf("Error: can't copy %s to a temporary location..\n", kextPath.lastPathComponent.UTF8String);
-                [self cleanTempKextAtPath:tempKext];
-                exit(1);
-            }
-        }
-    }
+    [fm copyItemAtPath:kextPath toPath:newKext error:nil];
     // load the executable and the plist
-    NSData *binary = [NSData dataWithContentsOfFile:[tempKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"]];
+    NSData *binary = [NSData dataWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"]];
     NSMutableDictionary *info =
-    [NSMutableDictionary dictionaryWithContentsOfFile:[tempKext stringByAppendingPathComponent:@"Contents/Info.plist"]];
+    [NSMutableDictionary dictionaryWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/Info.plist"]];
     
     if (!binary) {
         printf("Error: can't load IONVMeFamily binary..\n");
-        [self cleanTempKextAtPath:tempKext];
+        [self cleanTempKextAtPath:newKext];
         return NO;
     }
     
     if (!info) {
         printf("Error: can't load Info.plist..\n");
-        [self cleanTempKextAtPath:tempKext];
+        [self cleanTempKextAtPath:newKext];
         return NO;
     }
     
@@ -473,13 +431,13 @@ Creative Commons Notice
         
         if (!Find || !Replace) {
             printf("Error: can't load patch with comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
-            [self cleanTempKextAtPath:tempKext];
+            [self cleanTempKextAtPath:newKext];
             return NO;
         }
         
         if (Find.length != Replace.length) {
             printf("Error: Find & Replace length mismatch for patch with Comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
-            [self cleanTempKextAtPath:tempKext];
+            [self cleanTempKextAtPath:newKext];
             return NO;
         }
         globalCount ++;
@@ -497,15 +455,15 @@ Creative Commons Notice
     
     if (patchedCount > 0 && patchedCount == globalCount) {
         [binary writeToFile:
-         [[tempKext stringByAppendingPathComponent:@"Contents/MacOS"] stringByAppendingPathComponent:newKextExecutable]
+         [[newKext stringByAppendingPathComponent:@"Contents/MacOS"] stringByAppendingPathComponent:newKextExecutable]
                  atomically:YES];
-        [fm removeItemAtPath:[tempKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"] error:nil];
+        [fm removeItemAtPath:[newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"] error:nil];
         printf("Success patching binary!\n");
     }
     else
     {
         printf("Failed applying binary patches, nothing done.\n");
-        [self cleanTempKextAtPath:tempKext];
+        [self cleanTempKextAtPath:newKext];
         return NO;
     }
     
@@ -573,26 +531,17 @@ Creative Commons Notice
     // adding credits
     [info setObject:nvCredits forKey:@"Credits"];
     
-    if ([info writeToFile:[tempKext stringByAppendingPathComponent:@"Contents/Info.plist"] atomically:YES]) {
+    if ([info writeToFile:[newKext stringByAppendingPathComponent:@"Contents/Info.plist"] atomically:YES]) {
         printf("Success patching Info.plist!\n");
     }
     else
     {
         printf("Error: unable to patch Info.plist..\n");
-        [self cleanTempKextAtPath:tempKext];
+        [self cleanTempKextAtPath:newKext];
         return NO;
     }
     
-    // move the patched kext
-    if ([fm copyItemAtPath:tempKext toPath:newKext error:nil]) {
-        printf("Success creating %s\n", newKext.UTF8String);
-    }
-    else
-    {
-        printf("Error: failed to moving patched kext in place...\n");
-        [self cleanTempKextAtPath:tempKext];
-        return NO;
-    }
+    printf("Success creating %s\n", newKext.UTF8String);
     
     // generate config.plist sample
     NSMutableDictionary *configSample = [NSMutableDictionary dictionary];
@@ -614,8 +563,6 @@ Creative Commons Notice
     {
         printf("Error: failed writing the configSample..\n");
     }
-    
-    [self cleanTempKextAtPath:tempKext];
     return YES;
 }
 
