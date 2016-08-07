@@ -23,3 +23,8 @@ Easy ways w/o -s option:
 	NVMeP
 	NVMeP -i -k /User/Peter/Desktop/IONVMEFamily.kext
 	..will find a compatible patch (if any).
+
+WARNING
+NVMeP produces a new kext by copying the original IONVMEFamily.kext into "IONVMEFamilyBorg.kext" and also a configSample.plist containing patches for Clover:
+
+Clover in case of partially patches applied, can cause the corruption of your disk, and anyway in both cases I'm not responsible for any kind of damages or loss of datas. This is a hack, so use only if you have a backup and if you are able to restore the System in case of failure.

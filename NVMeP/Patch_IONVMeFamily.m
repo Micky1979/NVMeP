@@ -415,7 +415,7 @@ Creative Commons Notice
     
     // copy IONVMEFamily.kext
     if (![fm copyItemAtPath:kextPath toPath:tempKext error:nil]) {
-        // NSFileManager hate to copying extennded attributes...
+        // NSFileManager hate to copying extended attributes...
         // .. try with cp -RX
         NSTask *cpTask;
         NSPipe *cpPipe;
