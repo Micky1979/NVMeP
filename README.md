@@ -8,6 +8,7 @@ cd /to/a/folder
 NVMeP -i "add internal icon fix".
 
 NVMeP -s [num] "try a specific patch":
+
     0 for Sierra DP4
     
     1 for Sierra DP1/3
