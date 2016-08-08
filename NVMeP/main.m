@@ -404,22 +404,30 @@ int main(int argc, char* const argv[]) {
         
         int numPatch = -1;
         int c;
-        while ( (c = getopt(argc, argv, "s:ihHk:") ) != -1)
+        while ( (c = getopt(argc, argv, "is:k:hH") ) != -1)
         {
             switch (c)
             {
-                case 's':
-                    numPatch = [[[NSString new] initWithUTF8String:optarg] intValue];
-                    break;
                 case 'i':
                     addExternalIconFix = YES;
+                    break;
+                case 's':
+                    numPatch = [[[NSString new] initWithUTF8String:optarg] intValue];
                     break;
                 case 'k':
                     kextPath = [[NSString new] initWithUTF8String:optarg];
                     break;
                 case 'h':
-                case 'H':
+                    showHelp(sorted);
+                    break;
+                case ':':
+                    printf("Option -%c requires an argument\n", optopt);
+                    showHelp(sorted);
+                    break;
                 case '?':
+                    showHelp(sorted);
+                    break;
+                default:
                     showHelp(sorted);
                     break;
             }

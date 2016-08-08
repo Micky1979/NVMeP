@@ -407,7 +407,7 @@ Creative Commons Notice
     // copy IONVMEFamily.kext
     [fm copyItemAtPath:kextPath toPath:newKext error:nil];
     // load the executable and the plist
-    NSData *binary = [NSData dataWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"]];
+    NSMutableData *binary = [NSMutableData dataWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"]];
     NSMutableDictionary *info =
     [NSMutableDictionary dictionaryWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/Info.plist"]];
     
@@ -444,6 +444,7 @@ Creative Commons Notice
         NSRange range = [binary rangeOfData:Find options:0 range:NSMakeRange(0, [binary length])];
         if (range.location != NSNotFound) {
             // Success
+            [binary replaceBytesInRange:range withBytes:(__bridge const void * _Nonnull)(Replace)];
             patchedCount++;
             printf("Success applying patch with Comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
         }
