@@ -406,6 +406,8 @@ Creative Commons Notice
     
     // copy IONVMEFamily.kext
     [fm copyItemAtPath:kextPath toPath:newKext error:nil];
+    
+
     // load the executable and the plist
     NSMutableData *binary = [NSMutableData dataWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"]];
     NSMutableDictionary *info =

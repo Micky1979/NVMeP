@@ -350,7 +350,7 @@ Creative Commons Notice
 #import "NVME.h"
 
 // -----------------------------------------------------
-#define cmdVersion @"1.2"
+#define cmdVersion @"1.3"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -359,7 +359,7 @@ cmdVersion]
 void showHelp (NSArray *patches){
     printf("Usage:\n");
     printf("cd /to/a/folder\n\n");
-    printf("NVMeP -i \"add internal icon fix\".\n");
+    printf("NVMeP -i \"add internal icon fix\" (may fail if already included).\n");
     printf("\nNVMeP -s [num] \"try a specific patch\":\n");
     for (NSString *patch in patches) {
         printf("\t%lu for %s\n", (unsigned long)[patches indexOfObject:patch], patch.UTF8String);
@@ -369,7 +369,7 @@ void showHelp (NSArray *patches){
     printf("\nNVMeP -h \"show this message\".\n");
     printf("\nEasy ways w/o -s option:\n");
     printf("\tNVMeP\n");
-    printf("\tNVMeP -i -k /User/Peter/Desktop/IONVMEFamily.kext\n");
+    printf("\tNVMeP -k /User/Peter/Desktop/IONVMEFamily.kext\n");
     printf("\t..will find a compatible patch (if any).\n");
     exit(1);
 }
@@ -404,7 +404,7 @@ int main(int argc, char* const argv[]) {
         
         int numPatch = -1;
         int c;
-        while ( (c = getopt(argc, argv, "is:k:hH") ) != -1)
+        while ( (c = getopt(argc, argv, "is:k:h") ) != -1)
         {
             switch (c)
             {
@@ -421,7 +421,7 @@ int main(int argc, char* const argv[]) {
                     showHelp(sorted);
                     break;
                 case ':':
-                    printf("Option -%c requires an argument\n", optopt);
+                    printf("\noption -%c requires an argument\n", optopt);
                     showHelp(sorted);
                     break;
                 case '?':
@@ -432,20 +432,26 @@ int main(int argc, char* const argv[]) {
                     break;
             }
         }
-        
+
         if (![fm fileExistsAtPath:kextPath]) {
             printf("Error: %s does not exist!\n", kextPath.UTF8String);
             return 1;
         }
         
+        NSMutableArray *KTP;
         int count = 0;
         if (numPatch >= 0) {
             if (numPatch <= [sorted indexOfObject:sorted.lastObject]) {
-                printf("using optarg -s %d:\n", numPatch);
-                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:[allPatches objectForKey:[sorted objectAtIndex:numPatch]]]) {
+                printf("using optarg -s %d (%s):\n", numPatch, [[sorted objectAtIndex:numPatch] UTF8String]);
+                KTP = [NSMutableArray arrayWithArray:[allPatches objectForKey:[sorted objectAtIndex:numPatch]]];
+                if (addExternalIconFix) {
+                    [KTP insertObject:nvExtIconPatch atIndex:0];
+                }
+                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:KTP]) {
                     count ++;
                     printf("\nSUCCESS!\n");
-                    printf("%s successfully generated using %s patches!\n", [patchedKextName UTF8String], [[sorted objectAtIndex:numPatch] UTF8String]);
+                    printf("%s successfully generated using %s patches!\n",
+                           [patchedKextName UTF8String], [[sorted objectAtIndex:numPatch] UTF8String]);
                 }
             }
             else
@@ -458,8 +464,8 @@ int main(int argc, char* const argv[]) {
         {
             for (NSString *patch in sorted)
             {
-                printf("Try using patch for %s:\n", patch.UTF8String);
-                NSMutableArray *KTP = [NSMutableArray arrayWithArray:[allPatches objectForKey:patch]];
+                printf("\nTry using patch for %s:\n", patch.UTF8String);
+                KTP = [NSMutableArray arrayWithArray:[allPatches objectForKey:patch]];
                 if (addExternalIconFix) {
                     [KTP insertObject:nvExtIconPatch atIndex:0];
                 }

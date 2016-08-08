@@ -5,7 +5,7 @@ Usage:
 
 cd /to/a/folder
 
-NVMeP -i "add internal icon fix".
+NVMeP -i "add internal icon fix" (may fail if already included).
 
 NVMeP -s [num] "try a specific patch":
 
@@ -26,8 +26,11 @@ NVMeP -k "/path/to/IONVMEFamily.kext (/S/L/E/IONVMEFamily.kext by default)".
 NVMeP -h "show this message".
 
 Easy ways w/o -s option:
+
     NVMeP
+
     NVMeP -i -k /User/Peter/Desktop/IONVMEFamily.kext
+
     ..will find a compatible patch (if any).
 
 WARNING
