@@ -513,6 +513,12 @@ Creative Commons Notice
             NSMutableDictionary *GenericNVMeSSD = [NSMutableDictionary dictionaryWithDictionary:
                                                    [IOKitPersonalities objectForKey:@"GenericNVMeSSD"]];
             
+            if ([GenericNVMeSSD objectForKey:@"IOClass"]
+                && [[GenericNVMeSSD objectForKey:@"IOClass"] isKindOfClass:[NSString class]]) {
+                
+                [GenericNVMeSSD setObject:@"BorgNVMeController" forKey:@"IOClass"];
+            }
+            
             if ([GenericNVMeSSD objectForKey:@"IONameMatch"]
                 && [[GenericNVMeSSD objectForKey:@"IONameMatch"] isKindOfClass:[NSArray class]]) {
                 needPlistPatch = YES;
