@@ -359,6 +359,11 @@ Creative Commons Notice
                        binPatch:(NSArray *)binPatch
 {
     // -----------------------------------------------------
+    // Controller patch
+    UInt8 nvControllerBytesF[] = {0x00, 0x41, 0x70, 0x70, 0x6C, 0x65, 0x4E, 0x56, 0x4D, 0x65, 0x43, 0x6F, 0x6E, 0x74, 0x72, 0x6F, 0x6C, 0x6C, 0x65, 0x72, 0x00};
+    
+    UInt8 nvControllerBytesR[] = {0x00, 0x42, 0x6F, 0x72, 0x67, 0x50, 0x4E, 0x56, 0x4D, 0x65, 0x43, 0x6F, 0x6E, 0x74, 0x72, 0x6F, 0x6C, 0x6C, 0x65, 0x72, 0x00};
+    // -----------------------------------------------------
     // Info.plist patch
     UInt8 nvPlistPatchBytesF[] = {0x3C, 0x73, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x3E, 0x70, 0x63, 0x69, 0x31, 0x34, 0x34, 0x64, 0x2C, 0x61, 0x38, 0x30, 0x34, 0x3C, 0x2F, 0x73, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x3E};
     
@@ -456,6 +461,22 @@ Creative Commons Notice
             printf("**Error applying patch with Comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
         }
     }
+    // Controller name
+    globalCount++;
+    NSData *cFind = [NSData dataWithBytes:nvControllerBytesF length:sizeof(nvControllerBytesF)];
+    NSData *cReplace = [NSData dataWithBytes:nvControllerBytesR length:sizeof(nvControllerBytesR)];
+    NSRange cRange = [binary rangeOfData:cFind options:0 range:NSMakeRange(0, [binary length])];
+    if (cRange.location != NSNotFound) {
+        // Success
+        [binary replaceBytesInRange:cRange withBytes:(__bridge const void * _Nonnull)(cReplace)];
+        patchedCount++;
+        printf("Success applying Controller patch (idea of RehabMan)!\n");
+    }
+    else
+    {
+        printf("**Error applying Controller patch..\n");
+    }
+    
     
     if (patchedCount > 0 && patchedCount == globalCount) {
         [binary writeToFile:
@@ -517,7 +538,7 @@ Creative Commons Notice
             if ([GenericNVMeSSD objectForKey:@"IOClass"]
                 && [[GenericNVMeSSD objectForKey:@"IOClass"] isKindOfClass:[NSString class]]) {
                 
-                [GenericNVMeSSD setObject:@"BorgNVMeController" forKey:@"IOClass"];
+                [GenericNVMeSSD setObject:@"BorgPNVMeController" forKey:@"IOClass"];
             }
             
             if ([GenericNVMeSSD objectForKey:@"IONameMatch"]
