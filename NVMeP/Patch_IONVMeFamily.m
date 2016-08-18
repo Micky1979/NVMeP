@@ -349,6 +349,7 @@ Creative Commons Notice
 // -----------------------------------------------------
 // Supported pci devices
 #define nvSupportedIds [NSArray arrayWithObjects:\
+@"pci8086,0953",\
 @"pci144d,a802",\
 @"pci144d,a804", nil]
 
