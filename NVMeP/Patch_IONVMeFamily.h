@@ -351,7 +351,7 @@ Creative Commons Notice
 #define fm [NSFileManager defaultManager]
 #endif
 
-#define newKextIdentifier @"com.patchedByNVMeP.IONVMeFamilyBorg"
+#define newKextIdentifier @"com.apple.patchedByNVMeP.IONVMeFamilyBorg"
 #define newKextExecutable @"IONVMeFamilyBorg"
 
 #define kextName @"IONVMeFamily.kext"
