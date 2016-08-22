@@ -350,7 +350,7 @@ Creative Commons Notice
 #import "NVME.h"
 
 // -----------------------------------------------------
-#define cmdVersion @"1.6"
+#define cmdVersion @"1.7"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]

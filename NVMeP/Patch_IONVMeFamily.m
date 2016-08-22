@@ -452,7 +452,7 @@ Creative Commons Notice
         NSRange range = [binary rangeOfData:Find options:0 range:NSMakeRange(0, [binary length])];
         if (range.location != NSNotFound) {
             // Success
-            [binary replaceBytesInRange:range withBytes:(__bridge const void * _Nonnull)(Replace)];
+            [binary replaceBytesInRange:range withBytes:[Replace bytes]];
             patchedCount++;
             printf("Success applying patch with Comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
         }
@@ -468,7 +468,7 @@ Creative Commons Notice
     NSRange cRange = [binary rangeOfData:cFind options:0 range:NSMakeRange(0, [binary length])];
     if (cRange.location != NSNotFound) {
         // Success
-        [binary replaceBytesInRange:cRange withBytes:(__bridge const void * _Nonnull)(cReplace)];
+        [binary replaceBytesInRange:cRange withBytes:[cReplace bytes]];
         patchedCount++;
         printf("Success applying Controller patch (idea of RehabMan)!\n");
     }
