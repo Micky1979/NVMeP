@@ -368,7 +368,8 @@ Creative Commons Notice
 }
 
 + (BOOL)patchIONVMeFamilyAtPath:(NSString *)kextPath
-                       binPatch:(NSArray *)binPatch;
+                       binPatch:(NSArray *)binPatch
+            useExternalIconPatch:(BOOL)iconPatch;
 
 + (void)cleanTempKextAtPath:(NSString *)path;
 

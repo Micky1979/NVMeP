@@ -357,6 +357,7 @@ Creative Commons Notice
 
 + (BOOL)patchIONVMeFamilyAtPath:(NSString *)kextPath
                        binPatch:(NSArray *)binPatch
+            useExternalIconPatch:(BOOL)iconPatch
 {
     // -----------------------------------------------------
     // Controller patch
@@ -380,6 +381,7 @@ Creative Commons Notice
     
     BOOL needPlistPatch = NO;
     NSString *newKext, *currentDir, *configPath;
+    NSMutableArray *mutableBinPatch = [NSMutableArray arrayWithArray:binPatch];
     
     currentDir = [fm currentDirectoryPath];
     newKext = [currentDir stringByAppendingPathComponent:patchedKextName];
@@ -431,9 +433,14 @@ Creative Commons Notice
         return NO;
     }
     
+    // do we need external icon patch?
+    if (!iconPatch) {
+        [mutableBinPatch removeObjectAtIndex:0]; /* icon patch is always at index 0 */
+    }
+    
     // Patching the binary!
     int globalCount = 0, patchedCount = 0;
-    for (NSDictionary *dict in binPatch) {
+    for (NSDictionary *dict in mutableBinPatch) {
         NSData *Find = [dict objectForKey:@"Find"];
         NSData *Replace = [dict objectForKey:@"Replace"];
         
@@ -578,7 +585,7 @@ Creative Commons Notice
     NSMutableDictionary *configSample = [NSMutableDictionary dictionary];
     NSMutableDictionary *KernelAndKextPatches = [NSMutableDictionary dictionary];
     NSMutableArray *KextsToPatch = [NSMutableArray array];
-    [KextsToPatch addObjectsFromArray:binPatch];
+    [KextsToPatch addObjectsFromArray:mutableBinPatch];
     if (needPlistPatch) {
         [KextsToPatch insertObject:nvPlistPatch atIndex:0];
     }

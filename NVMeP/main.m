@@ -350,7 +350,8 @@ Creative Commons Notice
 #import "NVME.h"
 
 // -----------------------------------------------------
-#define cmdVersion @"1.7"
+#define DEBUG_ME 0 // set to 1 to make the command works in Xcode
+#define cmdVersion @"1.8"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -376,6 +377,11 @@ void showHelp (NSArray *patches){
 
 int main(int argc, char* const argv[]) {
     @autoreleasepool {
+        
+        if ([[fm currentDirectoryPath].lastPathComponent isEqualToString:@"Debug"] && !DEBUG_ME) {
+            printf("NVMeP is inside a folder called \"Debug\" so nothing is done.\nSet the \"DEBUG_ME\" macro to 1 to run all the code in Xcode.\nProduced command should works as expected in both cases, this is just to avoid producing kext to the Debug folder.\n");
+            return 0;
+        }
         
         NSDictionary *allPatches = [NSDictionary dictionaryWithObjectsAndKeys:
                                     nvSie_BinPatch_DP4, @"Sierra DP4",
@@ -444,10 +450,7 @@ int main(int argc, char* const argv[]) {
             if (numPatch <= [sorted indexOfObject:sorted.lastObject]) {
                 printf("using optarg -s %d (%s):\n", numPatch, [[sorted objectAtIndex:numPatch] UTF8String]);
                 KTP = [NSMutableArray arrayWithArray:[allPatches objectForKey:[sorted objectAtIndex:numPatch]]];
-                if (addExternalIconFix) {
-                    [KTP insertObject:nvExtIconPatch atIndex:0];
-                }
-                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:KTP]) {
+                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:KTP useExternalIconPatch:addExternalIconFix]) {
                     count ++;
                     printf("\nSUCCESS!\n");
                     printf("%s successfully generated using %s patches!\n",
@@ -466,10 +469,7 @@ int main(int argc, char* const argv[]) {
             {
                 printf("\nTry using patch for %s:\n", patch.UTF8String);
                 KTP = [NSMutableArray arrayWithArray:[allPatches objectForKey:patch]];
-                if (addExternalIconFix) {
-                    [KTP insertObject:nvExtIconPatch atIndex:0];
-                }
-                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:KTP]) {
+                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:KTP useExternalIconPatch:addExternalIconFix]) {
                     count ++;
                     printf("\nSUCCESS!\n");
                     printf("%s successfully generated using %s patches!\n", [patchedKextName UTF8String], patch.UTF8String);

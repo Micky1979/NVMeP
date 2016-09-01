@@ -5,7 +5,7 @@ Usage:
 
 cd /to/a/folder
 
-NVMeP -i "add internal icon fix" (may fail if already included).
+NVMeP -i "add internal icon fix".
 
 NVMeP -s [num] "try a specific patch":
 

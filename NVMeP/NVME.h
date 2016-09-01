@@ -357,6 +357,7 @@ Creative Commons Notice
 // EL CAPITAN 10.11.5 binpatches ready.
 // NOTE: for Clover needs to add the InfoPlistPatch!!
 #define nvEC_BinPatch_10115 [NSArray arrayWithObjects:\
+                            nvExtIconEC,\
                             nvEC5_Patch00,\
                             nvEC5_Patch01,\
                             nvEC5_Patch02,\
@@ -372,6 +373,7 @@ Creative Commons Notice
 // EL CAPITAN 10.11.6 beta 4 binpatches ready.
 // NOTE: for Clover needs to add the InfoPlistPatch!!
 #define nvEC_BinPatch_10116_B4 [NSArray arrayWithObjects:\
+                            nvExtIconEC,\
                             nvEC6_Patch00,\
                             nvEC6_Patch01,\
                             nvEC6_Patch02,\
@@ -389,6 +391,7 @@ Creative Commons Notice
 // EL CAPITAN 10.11.6 final () binpatches ready.
 // NOTE: for Clover needs to add the InfoPlistPatch!!
 #define nvEC_BinPatch_10116 [NSArray arrayWithObjects:\
+                            nvExtIconEC,\
                             nvEC6_Patch00,\
                             nvEC6_Patch01,\
                             nvEC6_Patch02,\
@@ -406,6 +409,7 @@ Creative Commons Notice
 // SIERRA DP1-DP3 binpatches ready.
 // NOTE: for Clover needs to add the InfoPlistPatch!!
 #define nvSie_BinPatch_DP1_3 [NSArray arrayWithObjects:\
+                            nvExtIconSierra,\
                             nvSie_Patch00,\
                             nvSie_Patch01,\
                             nvSie_Patch02,\
@@ -426,6 +430,7 @@ Creative Commons Notice
 // SIERRA DP4 binpatches ready. 
 // NOTE: for Clover needs to add the InfoPlistPatch!!
 #define nvSie_BinPatch_DP4 [NSArray arrayWithObjects:\
+                            nvExtIconSierra,\
                             nvSie_DP4_Patch00,\
                             nvSie_Patch01,\
                             nvSie_Patch02,\

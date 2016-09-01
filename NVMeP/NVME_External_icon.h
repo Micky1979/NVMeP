@@ -351,15 +351,29 @@ Creative Commons Notice
 /* External Icon fix for IONVMeFamily
  https://pikeralpha.wordpress.com/2016/07/01/help-my-nvme-show-up-as-external/
  */
-UInt8 nvExtIconBytesF[] = {0x8B, 0xA7, 0xD0, 0x00, 0x00, 0x00, 0x49, 0x29, 0xD4, 0xB8, 0x00, 0x10, 0x00, 0x00, 0x4D, 0x8B, 0x6D, 0x00, 0x49, 0x01};
 
-UInt8 nvExtIconBytesR[] = {0x8B, 0xA7, 0xD0, 0x00, 0x00, 0x00, 0x49, 0x29, 0xD4, 0xB8, 0x00, 0x02, 0x00, 0x00, 0x4D, 0x8B, 0x6D, 0x00, 0x49, 0x01};
+// El Capitan
+UInt8 nvExtIconECBytesF[] = {0x48, 0x85, 0xC0, 0x74, 0x07, 0x80, 0x8B, 0x00, 0x01, 0x00, 0x00, 0x10};
 
-#define nvExtIconPatch [NSDictionary dictionaryWithObjectsAndKeys:\
-                              @"IONVMeFamily Pike R. Alpha Patch External icon", @"Comment",\
+UInt8 nvExtIconECBytesR[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x80, 0x8B, 0x00, 0x01, 0x00, 0x00, 0x10};
+
+// Sierra
+ UInt8 nvExtIconSieBytesF[] = {0x48, 0x85, 0xC0, 0x74, 0x07, 0x80, 0x8B, 0x08, 0x01, 0x00, 0x00, 0x10};
+ 
+ UInt8 nvExtIconSieBytesR[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x80, 0x8B, 0x08, 0x01, 0x00, 0x00, 0x10};
+
+#define nvExtIconEC [NSDictionary dictionaryWithObjectsAndKeys:\
+                              @"IONVMeFamily Pike R. Alpha El Capitan external icon patch", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5, 10.11.6, 10.12.x", @"MatchOS",\
-                              [NSData dataWithBytes:nvExtIconBytesF length:sizeof(nvExtIconBytesF)], @"Find",\
-                              [NSData dataWithBytes:nvExtIconBytesR length:sizeof(nvExtIconBytesR)], @"Replace", nil]
+                              @"10.11.5, 10.11.6", @"MatchOS",\
+                              [NSData dataWithBytes:nvExtIconECBytesF length:sizeof(nvExtIconECBytesF)], @"Find",\
+                              [NSData dataWithBytes:nvExtIconECBytesR length:sizeof(nvExtIconECBytesR)], @"Replace", nil]
+
+#define nvExtIconSierra [NSDictionary dictionaryWithObjectsAndKeys:\
+                              @"IONVMeFamily Pike R. Alpha Sierra external icon patch", @"Comment",\
+                              @"IONVMeFamily", @"Name",\
+                              @"10.12.x", @"MatchOS",\
+                              [NSData dataWithBytes:nvExtIconSieBytesF length:sizeof(nvExtIconSieBytesF)], @"Find",\
+                              [NSData dataWithBytes:nvExtIconSieBytesR length:sizeof(nvExtIconSieBytesR)], @"Replace", nil]
 
 #endif /* NVME_External_icon_h */
