@@ -5,12 +5,6 @@
 //  Created by Micky1979 on 02/08/16.
 //  Copyright © 2016 Micky1979. All rights reserved.
 //
-
-#import "NVME_10_11_5.h"
-#import "NVME_10_11_6.h"
-#import "NVME_Sierra.h"
-#import "NVME_External_icon.h"
-
 // https://pikeralpha.wordpress.com/license/
 /*
 Creative Commons Legal Code
@@ -349,6 +343,11 @@ Creative Commons Notice
     Creative Commons may be contacted at http://creativecommons.org/.
  
 */
+
+#import "NVME_10_11_5.h"
+#import "NVME_10_11_6.h"
+#import "NVME_Sierra.h"
+#import "NVME_External_icon.h"
 
 #ifndef NVME_h
 #define NVME_h
