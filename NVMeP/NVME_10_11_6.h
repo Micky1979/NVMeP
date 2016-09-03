@@ -358,7 +358,7 @@ UInt8 nv01_EC6BytesR[] = {0x85, 0xF6, 0x74, 0x61, 0x41, 0xC1, 0xE7, 0x09, 0x49, 
                               @"IONVMeFamily Pike R. Alpha Patch 01", @"Comment",\
                               @"IONVMeFamily", @"Name",\
                               @"10.11.6", @"MatchOS",\
-                              @"15G31 15G24b", @"MatchBuild",\
+                              @"15G31 15G24b 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv01_EC6BytesF length:sizeof(nv01_EC6BytesF)], @"Find",\
                               [NSData dataWithBytes:nv01_EC6BytesR length:sizeof(nv01_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -371,7 +371,7 @@ UInt8 nv02_03_EC6BytesR[] = {0x00, 0x00, 0x00, 0x83, 0xF9, 0x09, 0x75, 0x58, 0x4
                               @"IONVMeFamily Pike R. Alpha Patch 02-03", @"Comment",\
                               @"IONVMeFamily", @"Name",\
                               @"10.11.6", @"MatchOS",\
-                              @"15G31 15G24b", @"MatchBuild",\
+                              @"15G31 15G24b 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv02_03_EC6BytesF length:sizeof(nv02_03_EC6BytesF)], @"Find",\
                               [NSData dataWithBytes:nv02_03_EC6BytesR length:sizeof(nv02_03_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -385,7 +385,7 @@ UInt8 nv04_EC6BytesR[] = {0x48, 0x8D, 0x86, 0xFF, 0x0F, 0x00, 0x00, 0x48, 0xC1, 
                               @"IONVMeFamily Pike R. Alpha Patch 04", @"Comment",\
                               @"IONVMeFamily", @"Name",\
                               @"10.11.6", @"MatchOS",\
-                              @"15G31 15G24b", @"MatchBuild",\
+                              @"15G31 15G24b 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv04_EC6BytesF length:sizeof(nv04_EC6BytesF)], @"Find",\
                               [NSData dataWithBytes:nv04_EC6BytesR length:sizeof(nv04_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -399,7 +399,7 @@ UInt8 nv05_06_EC6BytesR[] = {0x48, 0x81, 0xE6, 0xFF, 0x01, 0x00, 0x00, 0x48, 0x0
                             @"IONVMeFamily Pike R. Alpha Patch 05-06", @"Comment",\
                             @"IONVMeFamily", @"Name",\
                             @"10.11.6", @"MatchOS",\
-                            @"15G31 15G24b", @"MatchBuild",\
+                            @"15G31 15G24b 15G1004", @"MatchBuild",\
                             [NSData dataWithBytes:nv05_06_EC6BytesF length:sizeof(nv05_06_EC6BytesF)], @"Find",\
                             [NSData dataWithBytes:nv05_06_EC6BytesR length:sizeof(nv05_06_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -412,7 +412,7 @@ UInt8 nv07_09_EC6BytesR[] = {0x0F, 0x00, 0x00, 0x49, 0xC1, 0xEE, 0x09, 0x49, 0x8
                             @"IONVMeFamily Pike R. Alpha Patch 07-08-09", @"Comment",\
                             @"IONVMeFamily", @"Name",\
                             @"10.11.6", @"MatchOS",\
-                            @"15G31 15G24b", @"MatchBuild",\
+                            @"15G31 15G24b 15G1004", @"MatchBuild",\
                             [NSData dataWithBytes:nv07_09_EC6BytesF length:sizeof(nv07_09_EC6BytesF)], @"Find",\
                             [NSData dataWithBytes:nv07_09_EC6BytesR length:sizeof(nv07_09_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -425,7 +425,7 @@ UInt8 nv10_EC6BytesR[] = {0x87, 0x2A, 0x01, 0x00, 0x00, 0xBA, 0x00, 0x02, 0x00, 
                             @"IONVMeFamily Pike R. Alpha Patch 10", @"Comment",\
                             @"IONVMeFamily", @"Name",\
                             @"10.11.6", @"MatchOS",\
-                            @"15G31 15G24b", @"MatchBuild",\
+                            @"15G31 15G24b 15G1004", @"MatchBuild",\
                             [NSData dataWithBytes:nv10_EC6BytesF length:sizeof(nv10_EC6BytesF)], @"Find",\
                             [NSData dataWithBytes:nv10_EC6BytesR length:sizeof(nv10_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -438,7 +438,7 @@ UInt8 nv11_EC6BytesR[] = {0x00, 0x00, 0x49, 0x29, 0xD4, 0xB8, 0x00, 0x02, 0x00, 
                             @"IONVMeFamily Pike R. Alpha Patch 11", @"Comment",\
                             @"IONVMeFamily", @"Name",\
                             @"10.11.6", @"MatchOS",\
-                            @"15G31 15G24b", @"MatchBuild",\
+                            @"15G31 15G24b 15G1004", @"MatchBuild",\
                             [NSData dataWithBytes:nv11_EC6BytesF length:sizeof(nv11_EC6BytesF)], @"Find",\
                             [NSData dataWithBytes:nv11_EC6BytesR length:sizeof(nv11_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -451,7 +451,7 @@ UInt8 nv12_13_EC6BytesR[] = {0x4D, 0x89, 0xD7, 0xBA, 0x00, 0x02, 0x00, 0x00, 0x4
                         @"IONVMeFamily Pike R. Alpha Patch 12-13", @"Comment",\
                         @"IONVMeFamily", @"Name",\
                         @"10.11.6", @"MatchOS",\
-                        @"15G31 15G24b", @"MatchBuild",\
+                        @"15G31 15G24b 15G1004", @"MatchBuild",\
                         [NSData dataWithBytes:nv12_13_EC6BytesF length:sizeof(nv12_13_EC6BytesF)], @"Find",\
                         [NSData dataWithBytes:nv12_13_EC6BytesR length:sizeof(nv12_13_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -464,7 +464,7 @@ UInt8 nv14_EC6BytesR[] = {0x0F, 0x00, 0x00, 0x48, 0xC1, 0xE9, 0x09, 0x66, 0xA9, 
                         @"IONVMeFamily Pike R. Alpha Patch 14", @"Comment",\
                         @"IONVMeFamily", @"Name",\
                         @"10.11.6", @"MatchOS",\
-                        @"15G31 15G24b", @"MatchBuild",\
+                        @"15G31 15G24b 15G1004", @"MatchBuild",\
                         [NSData dataWithBytes:nv14_EC6BytesF length:sizeof(nv14_EC6BytesF)], @"Find",\
                         [NSData dataWithBytes:nv14_EC6BytesR length:sizeof(nv14_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -479,7 +479,7 @@ UInt8 nv15_19_EC6BytesR[] = {0x41, 0x83, 0xF8, 0x07, 0x77, 0x6D, 0x44, 0x0F, 0xB
                         @"IONVMeFamily Pike R. Alpha Patch 15-16-17-18-19", @"Comment",\
                         @"IONVMeFamily", @"Name",\
                         @"10.11.6", @"MatchOS",\
-                        @"15G31 15G24b", @"MatchBuild",\
+                        @"15G31 15G24b 15G1004", @"MatchBuild",\
                         [NSData dataWithBytes:nv15_19_EC6BytesF length:sizeof(nv15_19_EC6BytesF)], @"Find",\
                         [NSData dataWithBytes:nv15_19_EC6BytesR length:sizeof(nv15_19_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -505,7 +505,7 @@ UInt8 nv20_22_EC6BytesR[] = {0x6D, 0x69, 0x6C, 0x79, 0x00, 0xC2, 0x58, 0x02, 0xF
                         @"IONVMeFamily Pike R. Alpha Patch 20-21-22", @"Comment",\
                         @"IONVMeFamily", @"Name",\
                         @"10.11.6", @"MatchOS",\
-                        @"15G31", @"MatchBuild",\
+                        @"15G31 15G1004", @"MatchBuild",\
                         [NSData dataWithBytes:nv20_22_EC6BytesF length:sizeof(nv20_22_EC6BytesF)], @"Find",\
                         [NSData dataWithBytes:nv20_22_EC6BytesR length:sizeof(nv20_22_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -534,7 +534,7 @@ UInt8 nv23_50_EC6BytesR[] = {0x04, 0x82, 0x01, 0x00, 0x58, 0xE1, 0x7F, 0x63, 0x9
                         @"IONVMeFamily Pike R. Alpha Patch 23-50", @"Comment",\
                         @"IONVMeFamily", @"Name",\
                         @"10.11.6", @"MatchOS",\
-                        @"15G31", @"MatchBuild",\
+                        @"15G31 15G1004", @"MatchBuild",\
                         [NSData dataWithBytes:nv23_50_EC6BytesF length:sizeof(nv23_50_EC6BytesF)], @"Find",\
                         [NSData dataWithBytes:nv23_50_EC6BytesR length:sizeof(nv23_50_EC6BytesR)], @"Replace", nil]
 // -----------------------------------------------------
