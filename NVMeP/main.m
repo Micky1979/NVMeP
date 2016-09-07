@@ -351,7 +351,7 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 #define DEBUG_ME 0 // set to 1 to make the command works in Xcode
-#define cmdVersion @"2.1"
+#define cmdVersion @"2.2"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -360,7 +360,8 @@ cmdVersion]
 void showHelp (NSArray *patches){
     printf("Usage:\n");
     printf("cd /to/a/folder\n\n");
-    printf("NVMeP -i \"add internal icon fix\" (may fail if already included).\n");
+    printf("NVMeP -i \"add internal icon fix\".\n");
+    printf("NVMeP -a \"leave Apple Class code\" (default is 0108200 as per specification).\n");
     printf("\nNVMeP -s [num] \"try a specific patch\":\n");
     for (NSString *patch in patches) {
         printf("\t%lu for %s\n", (unsigned long)[patches indexOfObject:patch], patch.UTF8String);
@@ -407,13 +408,17 @@ int main(int argc, char* const argv[]) {
         kextPath = [@"/System/Library/Extensions" stringByAppendingPathComponent:kextName]; // default
         
         BOOL addExternalIconFix = NO;
+        BOOL useOriginalClassCode = NO;
         
         int numPatch = -1;
         int c;
-        while ( (c = getopt(argc, argv, "is:k:h") ) != -1)
+        while ( (c = getopt(argc, argv, "ais:k:h") ) != -1)
         {
             switch (c)
             {
+                case 'a':
+                    useOriginalClassCode = YES;
+                    break;
                 case 'i':
                     addExternalIconFix = YES;
                     break;
@@ -450,7 +455,10 @@ int main(int argc, char* const argv[]) {
             if (numPatch <= [sorted indexOfObject:sorted.lastObject]) {
                 printf("using optarg -s %d (%s):\n", numPatch, [[sorted objectAtIndex:numPatch] UTF8String]);
                 KTP = [NSMutableArray arrayWithArray:[allPatches objectForKey:[sorted objectAtIndex:numPatch]]];
-                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:KTP useExternalIconPatch:addExternalIconFix]) {
+                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath
+                                                       binPatch:KTP
+                                           useExternalIconPatch:addExternalIconFix
+                                              useAppleClassCode:useOriginalClassCode]) {
                     count ++;
                     printf("\nSUCCESS!\n");
                     printf("%s successfully generated using %s patches!\n",
@@ -469,7 +477,10 @@ int main(int argc, char* const argv[]) {
             {
                 printf("\nTry using patch for %s:\n", patch.UTF8String);
                 KTP = [NSMutableArray arrayWithArray:[allPatches objectForKey:patch]];
-                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath binPatch:KTP useExternalIconPatch:addExternalIconFix]) {
+                if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath
+                                                       binPatch:KTP
+                                           useExternalIconPatch:addExternalIconFix
+                                              useAppleClassCode:useOriginalClassCode]) {
                     count ++;
                     printf("\nSUCCESS!\n");
                     printf("%s successfully generated using %s patches!\n", [patchedKextName UTF8String], patch.UTF8String);

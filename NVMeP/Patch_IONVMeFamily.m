@@ -346,19 +346,23 @@ Creative Commons Notice
 */
 
 #import "Patch_IONVMeFamily.h"
+#import "NVMeClassCode.h"
 // -----------------------------------------------------
-// Supported pci devices
+// Supported pci devices (unused, see at #undef)
 #define nvSupportedIds [NSArray arrayWithObjects:\
                                 @"pci8086,0953",\
                                 @"pci144d,a802",\
                                 @"pci144d,a804",\
                                 @"pci1b85,0601", nil]
 
+#undef nvSupportedIds /* like Rehabman do, IOPCIClassMatch for El Capitan also. To match NVMe class code instead of pci ids */
+
 @implementation Patch_IONVMeFamily
 
 + (BOOL)patchIONVMeFamilyAtPath:(NSString *)kextPath
                        binPatch:(NSArray *)binPatch
-            useExternalIconPatch:(BOOL)iconPatch
+           useExternalIconPatch:(BOOL)iconPatch
+              useAppleClassCode:(BOOL)AppleClassCode
 {
     // -----------------------------------------------------
     // Controller patch
@@ -381,12 +385,15 @@ Creative Commons Notice
     // -----------------------------------------------------
     
     BOOL needPlistPatch = NO;
-    NSString *newKext, *currentDir, *configPath;
+    NSString *newKext, *currentDir, *configPath, *IOPCIClassMatch;
     NSMutableArray *mutableBinPatch = [NSMutableArray arrayWithArray:binPatch];
     
     currentDir = [fm currentDirectoryPath];
     newKext = [currentDir stringByAppendingPathComponent:patchedKextName];
     configPath = [currentDir stringByAppendingPathComponent:@"configSample.plist"];
+    
+    // set the desired IOPCIClassMatch, PC style or Apple Style
+    IOPCIClassMatch = AppleClassCode ? nvAppleClassCode : nvPCClassCode;
     
     // checking write permissions
     if (![fm isWritableFileAtPath:[currentDir stringByAppendingString:@"/"]]) {
@@ -549,6 +556,7 @@ Creative Commons Notice
                 [GenericNVMeSSD setObject:@"BorgPNVMeController" forKey:@"IOClass"];
             }
             
+#ifdef nvSupportedIds
             if ([GenericNVMeSSD objectForKey:@"IONameMatch"]
                 && [[GenericNVMeSSD objectForKey:@"IONameMatch"] isKindOfClass:[NSArray class]]) {
                 needPlistPatch = YES;
@@ -561,7 +569,21 @@ Creative Commons Notice
                 
                 [GenericNVMeSSD setObject:IONameMatch forKey:@"IONameMatch"];
             }
+#else
+            // IOPCIClassMatch patch
+            if ([GenericNVMeSSD objectForKey:@"IOPCIClassMatch"]) {
+                // key already exist, if AppleClassCode is not requested.. patch it
+                if (!AppleClassCode) [GenericNVMeSSD setObject:IOPCIClassMatch forKey:@"IOPCIClassMatch"];
+            }
+            else
+            {
+                // key does not exist (El Capitan kext?).. patch it
+                [GenericNVMeSSD removeObjectForKey:@"IONameMatch"];
+                [GenericNVMeSSD setObject:IOPCIClassMatch forKey:@"IOPCIClassMatch"];
+            }
             
+            printf("IOPCIClassMatch = %s\n", IOPCIClassMatch.UTF8String);
+#endif
             [IOKitPersonalities setObject:GenericNVMeSSD forKey:@"GenericNVMeSSD"];
         }
         

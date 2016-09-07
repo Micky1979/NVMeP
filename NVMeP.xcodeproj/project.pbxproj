@@ -33,6 +33,7 @@
 		CE96CDA81D549BD000E3597F /* NVME_10_11_6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVME_10_11_6.h; sourceTree = "<group>"; };
 		CE96CDA91D54D70800E3597F /* Patch_IONVMeFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Patch_IONVMeFamily.h; sourceTree = "<group>"; };
 		CE96CDAA1D54D70800E3597F /* Patch_IONVMeFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Patch_IONVMeFamily.m; sourceTree = "<group>"; };
+		EC2E0BFF1D809C2F00715A43 /* NVMeClassCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NVMeClassCode.h; path = ../NVMeClassCode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				CE96CD9D1D53650300E3597F /* main.m */,
+				EC2E0BFF1D809C2F00715A43 /* NVMeClassCode.h */,
 				CE3169B01D576572006ACD23 /* NVME_External_icon.h */,
 				CE96CDA71D549BB800E3597F /* NVME_10_11_5.h */,
 				CE96CDA81D549BD000E3597F /* NVME_10_11_6.h */,
