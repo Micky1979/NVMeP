@@ -7,6 +7,8 @@ cd /to/a/folder
 
 NVMeP -i "add internal icon fix".
 
+NVMeP -a "leave Apple Class code" (default is 0108200 as per specification).
+
 NVMeP -s [num] "try a specific patch":
 
     0 for Sierra DP4
