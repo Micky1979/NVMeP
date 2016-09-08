@@ -352,7 +352,7 @@ Creative Commons Notice
  USE_CONTROLLER_PATCH set to 1, patch controller in binary and in Info.plist.
  If set to 0 increase the kext version, but is likely vanilla so that modded kext win and load
  */
-#define USE_CONTROLLER_PATCH 1
+#define USE_CONTROLLER_PATCH 0
 // -----------------------------------------------------
 // Supported pci devices (unused, see at #undef)
 #define nvSupportedIds [NSArray arrayWithObjects:\
