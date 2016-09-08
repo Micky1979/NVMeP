@@ -356,8 +356,8 @@ UInt8 nv01_EC5BytesR[] = {0x49, 0x89, 0xC6, 0x4D, 0x85, 0xF6, 0x74, 0x61, 0x41, 
 #define nvEC5_Patch00 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 01", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv01_EC5BytesF length:sizeof(nv01_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv01_EC5BytesR length:sizeof(nv01_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -369,8 +369,8 @@ UInt8 nv02_03_EC5BytesR[] = {0xB6, 0x8C, 0x88, 0x82, 0x00, 0x00, 0x00, 0x83, 0xF
 #define nvEC5_Patch01 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 01", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv02_03_EC5BytesF length:sizeof(nv02_03_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv02_03_EC5BytesR length:sizeof(nv02_03_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -382,8 +382,8 @@ UInt8 nv04_EC5BytesR[] = {0x48, 0x8D, 0x86, 0xFF, 0x0F, 0x00, 0x00, 0x48, 0xC1, 
 #define nvEC5_Patch02 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 04", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv04_EC5BytesF length:sizeof(nv04_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv04_EC5BytesR length:sizeof(nv04_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -395,8 +395,8 @@ UInt8 nv05_06_EC5BytesR[] = {0xE8, 0x48, 0x89, 0xC6, 0x48, 0x81, 0xE6, 0xFF, 0x0
 #define nvEC5_Patch03 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 05-06", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv05_06_EC5BytesF length:sizeof(nv05_06_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv05_06_EC5BytesR length:sizeof(nv05_06_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -408,8 +408,8 @@ UInt8 nv07_EC5BytesR[] = {0x49, 0x81, 0xC6, 0xFF, 0x0F, 0x00, 0x00, 0x49, 0xC1, 
 #define nvEC5_Patch04 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 07", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv07_EC5BytesF length:sizeof(nv07_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv07_EC5BytesR length:sizeof(nv07_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -421,8 +421,8 @@ UInt8 nv08_09_EC5BytesR[] = {0x02, 0x0F, 0x85, 0xB8, 0x00, 0x00, 0x00, 0x4C, 0x8
 #define nvEC5_Patch05 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 08-09", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv08_09_EC5BytesF length:sizeof(nv08_09_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv08_09_EC5BytesR length:sizeof(nv08_09_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -434,8 +434,8 @@ UInt8 nv10_EC5BytesR[] = {0x00, 0x00, 0x49, 0x89, 0x87, 0x2A, 0x01, 0x00, 0x00, 
 #define nvEC5_Patch06 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 10", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv10_EC5BytesF length:sizeof(nv10_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv10_EC5BytesR length:sizeof(nv10_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -447,8 +447,8 @@ UInt8 nv11_EC5BytesR[] = {0x8B, 0xA7, 0xD0, 0x00, 0x00, 0x00, 0x49, 0x29, 0xD4, 
 #define nvEC5_Patch07 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 11", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv11_EC5BytesF length:sizeof(nv11_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv11_EC5BytesR length:sizeof(nv11_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -460,8 +460,8 @@ UInt8 nv12_14_EC5BytesR[] = {0x80, 0x40, 0x15, 0x06, 0x4D, 0x89, 0xD7, 0xBA, 0x0
 #define nvEC5_Patch08 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 12-13-14", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv12_14_EC5BytesF length:sizeof(nv12_14_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv12_14_EC5BytesR length:sizeof(nv12_14_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -473,8 +473,8 @@ UInt8 nv15_19_EC5BytesR[] = {0x45, 0x0F, 0xB6, 0xC0, 0x41, 0x83, 0xF8, 0x07, 0x7
 #define nvEC5_Patch09 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 15-16-17-18-19", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.11.5", @"MatchOS",\
-                              @"15F34", @"MatchBuild",\
+                              @"10.11.5,10.11.6", @"MatchOS",\
+                              @"15F34 15G1004", @"MatchBuild",\
                               [NSData dataWithBytes:nv15_19_EC5BytesF length:sizeof(nv15_19_EC5BytesF)], @"Find",\
                               [NSData dataWithBytes:nv15_19_EC5BytesR length:sizeof(nv15_19_EC5BytesR)], @"Replace", nil]
 // -----------------------------------------------------

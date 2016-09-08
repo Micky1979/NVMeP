@@ -351,7 +351,7 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 #define DEBUG_ME 0 // set to 1 to make the command works in Xcode
-#define cmdVersion @"2.2"
+#define cmdVersion @"2.3"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -379,26 +379,27 @@ void showHelp (NSArray *patches){
 int main(int argc, char* const argv[]) {
     @autoreleasepool {
         
-        if ([[fm currentDirectoryPath].lastPathComponent isEqualToString:@"Debug"] && !DEBUG_ME) {
+        NSString *cmdPath = NSProcessInfo.processInfo.arguments[0];
+        if ([cmdPath.stringByDeletingLastPathComponent.lastPathComponent isEqualToString:@"Debug"] && !DEBUG_ME) {
             printf("NVMeP is inside a folder called \"Debug\" so nothing is done.\nSet the \"DEBUG_ME\" macro to 1 to run all the code in Xcode.\nProduced command should works as expected in both cases, this is just to avoid producing kext to the Debug folder.\n");
             return 0;
         }
         
         NSDictionary *allPatches = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    nvSie_BinPatch_DP4, @"Sierra DP4",
+                                    nvSie_BinPatch_DP4, @"Sierra DP4 and later",
                                     nvSie_BinPatch_DP1_3, @"Sierra DP1/3",
                                     nvEC_BinPatch_10116, @"El Capitan 10.11.6 (15G31)",
                                     nvEC_BinPatch_10116_B4, @"El Capitan 10.11.6 (Beta 4)",
-                                    nvEC_BinPatch_10115, @"El Capitan 10.11.5 (15F34)",
+                                    nvEC_BinPatch_10115, @"El Capitan 10.11.5 (15F34)/10.11.6 (15G1004)",
                                     nil];
         
         // NSDictionary cannot be sorted (thanks Apple), so using a secondary array
         NSArray *sorted = [NSArray arrayWithObjects:
-                           @"Sierra DP4",
+                           @"Sierra DP4 and later",
                            @"Sierra DP1/3",
                            @"El Capitan 10.11.6 (15G31)",
                            @"El Capitan 10.11.6 (Beta 4)",
-                           @"El Capitan 10.11.5 (15F34)",
+                           @"El Capitan 10.11.5 (15F34)/10.11.6 (15G1004)",
                            nil];
         
         printf("%s", [headerString UTF8String]);

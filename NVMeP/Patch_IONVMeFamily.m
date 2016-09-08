@@ -347,6 +347,12 @@ Creative Commons Notice
 
 #import "Patch_IONVMeFamily.h"
 #import "NVMeClassCode.h"
+
+/* -----------------------------------------------------
+ USE_CONTROLLER_PATCH set to 1, patch controller in binary and in Info.plist.
+ If set to 0 increase the kext version, but is likely vanilla so that modded kext win and load
+ */
+#define USE_CONTROLLER_PATCH 1
 // -----------------------------------------------------
 // Supported pci devices (unused, see at #undef)
 #define nvSupportedIds [NSArray arrayWithObjects:\
@@ -366,9 +372,11 @@ Creative Commons Notice
 {
     // -----------------------------------------------------
     // Controller patch
+#if USE_CONTROLLER_PATCH
     UInt8 nvControllerBytesF[] = {0x00, 0x41, 0x70, 0x70, 0x6C, 0x65, 0x4E, 0x56, 0x4D, 0x65, 0x43, 0x6F, 0x6E, 0x74, 0x72, 0x6F, 0x6C, 0x6C, 0x65, 0x72, 0x00};
     
     UInt8 nvControllerBytesR[] = {0x00, 0x42, 0x6F, 0x72, 0x67, 0x50, 0x4E, 0x56, 0x4D, 0x65, 0x43, 0x6F, 0x6E, 0x74, 0x72, 0x6F, 0x6C, 0x6C, 0x65, 0x72, 0x00};
+#endif
     // -----------------------------------------------------
     // Info.plist patch
     UInt8 nvPlistPatchBytesF[] = {0x3C, 0x73, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x3E, 0x70, 0x63, 0x69, 0x31, 0x34, 0x34, 0x64, 0x2C, 0x61, 0x38, 0x30, 0x34, 0x3C, 0x2F, 0x73, 0x74, 0x72, 0x69, 0x6E, 0x67, 0x3E};
@@ -476,7 +484,9 @@ Creative Commons Notice
             printf("**Error applying patch with Comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
         }
     }
-    // Controller name
+
+#if USE_CONTROLLER_PATCH
+    // Patch Controller name
     globalCount++;
     NSData *cFind = [NSData dataWithBytes:nvControllerBytesF length:sizeof(nvControllerBytesF)];
     NSData *cReplace = [NSData dataWithBytes:nvControllerBytesR length:sizeof(nvControllerBytesR)];
@@ -491,13 +501,19 @@ Creative Commons Notice
     {
         printf("**Error applying Controller patch..\n");
     }
-    
+#endif
     
     if (patchedCount > 0 && patchedCount == globalCount) {
+#if USE_CONTROLLER_PATCH
         [binary writeToFile:
          [[newKext stringByAppendingPathComponent:@"Contents/MacOS"] stringByAppendingPathComponent:newKextExecutable]
                  atomically:YES];
         [fm removeItemAtPath:[newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"] error:nil];
+#else
+        [binary writeToFile:
+         [[newKext stringByAppendingPathComponent:@"Contents/MacOS"] stringByAppendingPathComponent:@"IONVMeFamily"]
+                 atomically:YES];
+#endif
         printf("Success patching binary!\n");
     }
     else
@@ -508,6 +524,15 @@ Creative Commons Notice
     }
     
     // Patching the Info.plist (where needed)
+    if ([info objectForKey:@"CFBundleGetInfoString"]
+        && [[info objectForKey:@"CFBundleGetInfoString"] isKindOfClass:[NSString class]]) {
+        NSString *infoStr;
+        infoStr = [info objectForKey:@"CFBundleGetInfoString"];
+        infoStr = [infoStr stringByAppendingString:@" (NVMe patches © 2016 Pike R. Alpha)"];
+        [info setObject:infoStr forKey:@"CFBundleGetInfoString"];
+    }
+    
+#if USE_CONTROLLER_PATCH
     if ([info objectForKey:@"CFBundleExecutable"]) {
         [info setObject:newKextExecutable forKey:@"CFBundleExecutable"];
     }
@@ -519,27 +544,40 @@ Creative Commons Notice
     if ([info objectForKey:@"CFBundleIdentifier"]) {
         [info setObject:newKextIdentifier forKey:@"CFBundleIdentifier"];
     }
+#else
+    NSString * CFBundlev, *CFBundlevShort;
+    CFBundlev = [info objectForKey:@"CFBundleVersion"];
+    CFBundlevShort = [info objectForKey:@"CFBundleShortVersionString"];
     
-    if ([info objectForKey:@"CFBundleGetInfoString"]
-        && [[info objectForKey:@"CFBundleGetInfoString"] isKindOfClass:[NSString class]]) {
-        NSString *infoStr;
-        infoStr = [info objectForKey:@"CFBundleGetInfoString"];
-        infoStr = [infoStr stringByAppendingString:@" (NVMe patches © 2016 Pike R. Alpha)"];
-        [info setObject:infoStr forKey:@"CFBundleGetInfoString"];
+    [info setObject:[NSString stringWithFormat:@"99%@", CFBundlev] forKey:@"CFBundleVersion"];
+    [info setObject:[NSString stringWithFormat:@"99%@", CFBundlevShort] forKey:@"CFBundleShortVersionString"];
+    
+    // version.plist is not mandatory, but we patch it as well
+    NSMutableDictionary *versionplist = [NSMutableDictionary dictionaryWithContentsOfFile:
+                                         [newKext stringByAppendingPathComponent:@"Contents/version.plist"]];
+    
+    if (versionplist) {
+        CFBundlev = [versionplist objectForKey:@"CFBundleVersion"];
+        CFBundlevShort = [versionplist objectForKey:@"CFBundleShortVersionString"];
+        
+        [versionplist setObject:[NSString stringWithFormat:@"99%@", CFBundlev] forKey:@"CFBundleVersion"];
+        [versionplist setObject:[NSString stringWithFormat:@"99%@", CFBundlevShort] forKey:@"CFBundleShortVersionString"];
+        [versionplist writeToFile:[newKext stringByAppendingPathComponent:@"Contents/version.plist"] atomically:YES];
     }
-    
+#endif
     
     if ([info objectForKey:@"IOKitPersonalities"]
         && [[info objectForKey:@"IOKitPersonalities"] isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *IOKitPersonalities = [NSMutableDictionary dictionaryWithDictionary:[info objectForKey:@"IOKitPersonalities"]];
 
         for (id obj in IOKitPersonalities.allKeys) {
+#if USE_CONTROLLER_PATCH
             if ([[IOKitPersonalities objectForKey:obj] isKindOfClass:[NSDictionary class]]) {
                 if ([[IOKitPersonalities objectForKey:obj] objectForKey:@"CFBundleIdentifier"]) {
                     [[IOKitPersonalities objectForKey:obj] setObject:newKextIdentifier forKey:@"CFBundleIdentifier"];
                 }
             }
-            
+#endif
             if (![obj isEqualToString:@"GenericNVMeSSD"]) {
                 [IOKitPersonalities removeObjectForKey:obj];
             }
@@ -549,12 +587,13 @@ Creative Commons Notice
             && [[IOKitPersonalities objectForKey:@"GenericNVMeSSD"] isKindOfClass:[NSDictionary class]]) {
             NSMutableDictionary *GenericNVMeSSD = [NSMutableDictionary dictionaryWithDictionary:
                                                    [IOKitPersonalities objectForKey:@"GenericNVMeSSD"]];
-            
+#if USE_CONTROLLER_PATCH
             if ([GenericNVMeSSD objectForKey:@"IOClass"]
                 && [[GenericNVMeSSD objectForKey:@"IOClass"] isKindOfClass:[NSString class]]) {
                 
                 [GenericNVMeSSD setObject:@"BorgPNVMeController" forKey:@"IOClass"];
             }
+#endif
             
 #ifdef nvSupportedIds
             if ([GenericNVMeSSD objectForKey:@"IONameMatch"]
