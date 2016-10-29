@@ -448,4 +448,26 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 
+
+// SIERRA 10.12.1 binpatches ready.
+// NOTE: for Clover needs to add the InfoPlistPatch!!
+#define nvSie_BinPatch_1021 [NSArray arrayWithObjects:\
+                            nvExtIconSierra,\
+                            nvSie_1021_Patch00,\
+                            nvSie_Patch01,\
+                            nvSie_Patch02,\
+                            nvSie_Patch03,\
+                            nvSie_Patch04,\
+                            nvSie_Patch05,\
+                            nvSie_Patch06,\
+                            nvSie_Patch07,\
+                            nvSie_Patch08,\
+                            nvSie_Patch09,\
+                            nvSie_Patch10,\
+                            nvSie_Patch11,\
+                            nvSie_Patch12,\
+                            nvSie_Patch13,\
+                            nvSie_Patch14, nil]
+
+// -----------------------------------------------------
 #endif /* NVME_h */

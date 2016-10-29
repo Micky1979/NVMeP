@@ -351,7 +351,7 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 #define DEBUG_ME 0 // set to 1 to make the command works in Xcode
-#define cmdVersion @"2.3"
+#define cmdVersion @"2.4"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -386,15 +386,17 @@ int main(int argc, char* const argv[]) {
         }
         
         NSDictionary *allPatches = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    nvSie_BinPatch_DP4, @"Sierra DP4 and later",
-                                    nvSie_BinPatch_DP1_3, @"Sierra DP1/3",
-                                    nvEC_BinPatch_10116, @"El Capitan 10.11.6 (15G31)",
+                                    nvSie_BinPatch_1021,    @"Sierra 10.12.1 and later",
+                                    nvSie_BinPatch_DP4,     @"Sierra DP4 and later",
+                                    nvSie_BinPatch_DP1_3,   @"Sierra DP1/3",
+                                    nvEC_BinPatch_10116,    @"El Capitan 10.11.6 (15G31)",
                                     nvEC_BinPatch_10116_B4, @"El Capitan 10.11.6 (Beta 4)",
-                                    nvEC_BinPatch_10115, @"El Capitan 10.11.5 (15F34)/10.11.6 (15G1004)",
+                                    nvEC_BinPatch_10115,    @"El Capitan 10.11.5 (15F34)/10.11.6 (15G1004)",
                                     nil];
         
         // NSDictionary cannot be sorted (thanks Apple), so using a secondary array
         NSArray *sorted = [NSArray arrayWithObjects:
+                           @"Sierra 10.12.1 and later",
                            @"Sierra DP4 and later",
                            @"Sierra DP1/3",
                            @"El Capitan 10.11.6 (15G31)",
