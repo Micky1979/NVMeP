@@ -384,7 +384,7 @@ UInt8 nv01_1021_SieBytesR[] = {0x89, 0xB3, 0xF0, 0x02, 0x00, 0x00, 0xC1, 0xE0, 0
 @"IONVMeFamily Pike R. Alpha Patch 01 (10.12.1)", @"Comment",\
 @"IONVMeFamily", @"Name",\
 @"10.12.1", @"MatchOS",\
-@"16B2555", @"MatchBuild",\
+@"16B2555 16B2657", @"MatchBuild",\
 [NSData dataWithBytes:nv01_1021_SieBytesF length:sizeof(nv01_1021_SieBytesF)], @"Find",\
 [NSData dataWithBytes:nv01_1021_SieBytesR length:sizeof(nv01_1021_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -409,8 +409,8 @@ UInt8 nv03_SieBytesR[] = {0x00, 0xC7, 0x83, 0xA4, 0x00, 0x00, 0x00, 0x00, 0x02, 
 #define nvSie_Patch02 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 03", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv03_SieBytesF length:sizeof(nv03_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv03_SieBytesR length:sizeof(nv03_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -422,8 +422,8 @@ UInt8 nv04_SieBytesR[] = {0x49, 0x89, 0xC6, 0x4D, 0x85, 0xF6, 0x74, 0x61, 0x41, 
 #define nvSie_Patch03 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 04", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv04_SieBytesF length:sizeof(nv04_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv04_SieBytesR length:sizeof(nv04_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -435,8 +435,8 @@ UInt8 nv05_SieBytesR[] = {0x86, 0xFF, 0x0F, 0x00, 0x00, 0x48, 0xC1, 0xE8, 0x09, 
 #define nvSie_Patch04 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 05", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv05_SieBytesF length:sizeof(nv05_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv05_SieBytesR length:sizeof(nv05_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -448,8 +448,8 @@ UInt8 nv06_07_SieBytesR[] = {0x89, 0xC1, 0x81, 0xE1, 0xFF, 0x01, 0x00, 0x00, 0x4
 #define nvSie_Patch05 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 06-07", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv06_07_SieBytesF length:sizeof(nv06_07_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv06_07_SieBytesR length:sizeof(nv06_07_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -462,8 +462,8 @@ UInt8 nv08_SieBytesR[] = {0x49, 0x81, 0xC5, 0xFF, 0x0F, 0x00, 0x00, 0x49, 0xC1, 
 #define nvSie_Patch06 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 08", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv08_SieBytesF length:sizeof(nv08_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv08_SieBytesR length:sizeof(nv08_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -475,8 +475,8 @@ UInt8 nv09_10_SieBytesR[] = {0x06, 0x02, 0x00, 0x00, 0x4C, 0x8D, 0xB8, 0x00, 0x0
 #define nvSie_Patch07 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 09-10", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv09_10_SieBytesF length:sizeof(nv09_10_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv09_10_SieBytesR length:sizeof(nv09_10_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -488,8 +488,8 @@ UInt8 nv11_SieBytesR[] = {0x00, 0x00, 0x49, 0x89, 0x8E, 0x22, 0x01, 0x00, 0x00, 
 #define nvSie_Patch08 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 11", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv11_SieBytesF length:sizeof(nv11_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv11_SieBytesR length:sizeof(nv11_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -501,8 +501,8 @@ UInt8 nv12_SieBytesR[] = {0xC8, 0x00, 0x00, 0x00, 0x49, 0x29, 0xD7, 0xB8, 0x00, 
 #define nvSie_Patch09 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 12", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv12_SieBytesF length:sizeof(nv12_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv12_SieBytesR length:sizeof(nv12_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -514,8 +514,8 @@ UInt8 nv13_SieBytesR[] = {0xE1, 0xBF, 0x80, 0x40, 0x15, 0x06, 0x4D, 0x89, 0xD6, 
 #define nvSie_Patch10 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 13", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv13_SieBytesF length:sizeof(nv13_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv13_SieBytesR length:sizeof(nv13_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -527,8 +527,8 @@ UInt8 nv14_SieBytesR[] = {0x89, 0x64, 0xD8, 0xF8, 0x49, 0x81, 0xC4, 0x00, 0x02, 
 #define nvSie_Patch11 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 14", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv14_SieBytesF length:sizeof(nv14_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv14_SieBytesR length:sizeof(nv14_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -540,8 +540,8 @@ UInt8 nv15_SieBytesR[] = {0x05, 0xFF, 0x0F, 0x00, 0x00, 0x48, 0xC1, 0xE8, 0x09, 
 #define nvSie_Patch12 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 15", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv15_SieBytesF length:sizeof(nv15_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv15_SieBytesR length:sizeof(nv15_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -553,8 +553,8 @@ UInt8 nv16_SieBytesR[] = {0xC1, 0xE2, 0x08, 0x41, 0x0F, 0xB6, 0xC1, 0xC1, 0xE0, 
 #define nvSie_Patch13 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 16", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv16_SieBytesF length:sizeof(nv16_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv16_SieBytesR length:sizeof(nv16_SieBytesR)], @"Replace", nil]
 // -----------------------------------------------------
@@ -566,8 +566,8 @@ UInt8 nv17_SieBytesR[] = {0x45, 0x84, 0xC9, 0x0F, 0x95, 0xC0, 0x0F, 0xB6, 0xC0, 
 #define nvSie_Patch14 [NSDictionary dictionaryWithObjectsAndKeys:\
                               @"IONVMeFamily Pike R. Alpha Patch 17", @"Comment",\
                               @"IONVMeFamily", @"Name",\
-                              @"10.12", @"MatchOS",\
-                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555", @"MatchBuild",\
+                              @"10.12.x", @"MatchOS",\
+                              @"16A201w 16A239j 16A254g 16A238m 16A254g 16A270f 16A286a 16A294a 16A304a 16A313a 16A319 16B2555 16B2657", @"MatchBuild",\
                               [NSData dataWithBytes:nv17_SieBytesF length:sizeof(nv17_SieBytesF)], @"Find",\
                               [NSData dataWithBytes:nv17_SieBytesR length:sizeof(nv17_SieBytesR)], @"Replace", nil]
 #endif /* NVME_Sierra_h */
