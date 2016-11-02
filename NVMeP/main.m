@@ -351,7 +351,7 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 #define DEBUG_ME 0 // set to 1 to make the command works in Xcode
-#define cmdVersion @"2.4"
+#define cmdVersion @"2.5"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
