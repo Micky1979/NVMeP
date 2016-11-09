@@ -351,7 +351,7 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 #define DEBUG_ME 0 // set to 1 to make the command works in Xcode
-#define cmdVersion @"2.5"
+#define cmdVersion @"2.6"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -361,7 +361,7 @@ void showHelp (NSArray *patches){
     printf("Usage:\n");
     printf("cd /to/a/folder\n\n");
     printf("NVMeP -i \"add internal icon fix\".\n");
-    printf("NVMeP -a \"leave Apple Class code\" (default is 0108200 as per specification).\n");
+    printf("NVMeP -a \"leave Apple Class code\" (default is 01080200 as per specification).\n");
     printf("\nNVMeP -s [num] \"try a specific patch\":\n");
     for (NSString *patch in patches) {
         printf("\t%lu for %s\n", (unsigned long)[patches indexOfObject:patch], patch.UTF8String);

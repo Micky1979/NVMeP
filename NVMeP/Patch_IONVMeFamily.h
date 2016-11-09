@@ -357,6 +357,8 @@ Creative Commons Notice
 #define kextName @"IONVMeFamily.kext"
 #define patchedKextName @"IONVMeFamilyBorg.kext"
 
+#define ProbeScore 5000
+
 #define nvCredits [NSArray arrayWithObjects:\
 @"Pike R. Alpha (Author) https://pikeralpha.wordpress.com/2016/06/27/nvmefamily-kext-bin-patch-data/",\
 @"RehabMan (idea of making a new kext) https://github.com/RehabMan/patch-nvme",\
