@@ -369,6 +369,7 @@ Creative Commons Notice
                        binPatch:(NSArray *)binPatch
            useExternalIconPatch:(BOOL)iconPatch
               useAppleClassCode:(BOOL)AppleClassCode
+                  setProbeScore:(int)score
 {
     // -----------------------------------------------------
     // Controller patch
@@ -430,9 +431,11 @@ Creative Commons Notice
     
 
     // load the executable and the plist
-    NSMutableData *binary = [NSMutableData dataWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"]];
-    NSMutableDictionary *info =
-    [NSMutableDictionary dictionaryWithContentsOfFile:[newKext stringByAppendingPathComponent:@"Contents/Info.plist"]];
+    NSMutableData *binary = [NSMutableData dataWithContentsOfFile:
+                             [newKext stringByAppendingPathComponent:@"Contents/MacOS/IONVMeFamily"]];
+    
+    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithContentsOfFile:
+                                 [newKext stringByAppendingPathComponent:@"Contents/Info.plist"]];
     
     if (!binary) {
         printf("Error: can't load IONVMeFamily binary..\n");
@@ -458,13 +461,16 @@ Creative Commons Notice
         NSData *Replace = [dict objectForKey:@"Replace"];
         
         if (!Find || !Replace) {
-            printf("Error: can't load patch with comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
+            printf("Error: can't load patch with comment \"%s\"\n",
+                   [[dict objectForKey:@"Comment"] UTF8String]);
             [self cleanTempKextAtPath:newKext];
             return NO;
         }
         
         if (Find.length != Replace.length) {
-            printf("Error: Find & Replace length mismatch for patch with Comment \"%s\"\n", [[dict objectForKey:@"Comment"] UTF8String]);
+            printf("Error: Find & Replace length mismatch for patch with Comment \"%s\"\n",
+                   [[dict objectForKey:@"Comment"] UTF8String]);
+            
             [self cleanTempKextAtPath:newKext];
             return NO;
         }
@@ -586,7 +592,11 @@ Creative Commons Notice
                                                    [IOKitPersonalities objectForKey:@"GenericNVMeSSD"]];
             
             // set IOProbeScore
-            [GenericNVMeSSD setObject:[NSNumber numberWithInt:ProbeScore] forKey:@"IOProbeScore"];
+            if (score > 0) {
+                [GenericNVMeSSD setObject:[NSNumber numberWithInt:score] forKey:@"IOProbeScore"];
+                printf("IOProbeScore set to \"%d\"\n", score);
+            }
+            
 #if USE_CONTROLLER_PATCH
             if ([GenericNVMeSSD objectForKey:@"IOClass"]
                 && [[GenericNVMeSSD objectForKey:@"IOClass"] isKindOfClass:[NSString class]]) {

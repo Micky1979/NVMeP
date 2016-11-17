@@ -351,13 +351,13 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 #define DEBUG_ME 0 // set to 1 to make the command works in Xcode
-#define cmdVersion @"2.6"
+#define cmdVersion @"2.7"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
 // -----------------------------------------------------
 
-void showHelp (NSArray *patches){
+void showHelp (NSArray *patches) {
     printf("Usage:\n");
     printf("cd /to/a/folder\n\n");
     printf("NVMeP -i \"add internal icon fix\".\n");
@@ -367,6 +367,7 @@ void showHelp (NSArray *patches){
         printf("\t%lu for %s\n", (unsigned long)[patches indexOfObject:patch], patch.UTF8String);
     }
     printf("\n\te.g. NVMeP -s 0\n");
+    printf("\nNVMeP -p [num] \"set IOProbeScore key with the given integer\".\n");
     printf("\nNVMeP -k \"/path/to/IONVMEFamily.kext (/S/L/E/IONVMEFamily.kext by default)\".\n");
     printf("\nNVMeP -h \"show this message\".\n");
     printf("\nEasy ways w/o -s option:\n");
@@ -376,13 +377,37 @@ void showHelp (NSArray *patches){
     exit(1);
 }
 
+bool isInteger(char num[]) {
+    int c = 0;
+    if (num[0] == '-') {
+        c = 1;
+    }
+    for (; num[c] != 0; c++)
+    {
+        if (!isdigit(num[c])) {
+            printf ("%s is not an integer!\n", num);
+            return false;
+        }
+    }
+    if (num[0] == '-') {
+        printf ("negative numbers (%s) not allowed!\n", num);
+        return false;
+    }
+    return true;
+}
+
 int main(int argc, char* const argv[]) {
     @autoreleasepool {
         
-        NSString *cmdPath = NSProcessInfo.processInfo.arguments[0];
-        if ([cmdPath.stringByDeletingLastPathComponent.lastPathComponent isEqualToString:@"Debug"] && !DEBUG_ME) {
-            printf("NVMeP is inside a folder called \"Debug\" so nothing is done.\nSet the \"DEBUG_ME\" macro to 1 to run all the code in Xcode.\nProduced command should works as expected in both cases, this is just to avoid producing kext to the Debug folder.\n");
-            return 0;
+        NSString *containingFolder =
+        NSProcessInfo.processInfo.arguments[0].stringByDeletingLastPathComponent.lastPathComponent;
+        
+        if ([containingFolder isEqualToString:@"Debug"] || [containingFolder isEqualToString:@"Release"]) {
+            if (!DEBUG_ME) {
+                printf("NVMeP is inside a folder called \"%s\" so nothing is done.\nSet the \"DEBUG_ME\" macro to 1 to run all the code in Xcode.\nProduced command should works as expected in both cases, this is just to avoid producing kext to the Debug folder.\n", containingFolder.UTF8String);
+                return 0;
+            }
+            
         }
         
         NSDictionary *allPatches = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -414,8 +439,9 @@ int main(int argc, char* const argv[]) {
         BOOL useOriginalClassCode = NO;
         
         int numPatch = -1;
+        int score = 0;
         int c;
-        while ( (c = getopt(argc, argv, "ais:k:h") ) != -1)
+        while ( (c = getopt(argc, argv, "ais:k:p:h") ) != -1)
         {
             switch (c)
             {
@@ -426,6 +452,10 @@ int main(int argc, char* const argv[]) {
                     addExternalIconFix = YES;
                     break;
                 case 's':
+                    if (!isInteger(optarg)) {
+                        printf("\noption -%c requires an integer value\n", optopt);
+                        showHelp(sorted);
+                    }
                     numPatch = [[[NSString new] initWithUTF8String:optarg] intValue];
                     break;
                 case 'k':
@@ -433,6 +463,13 @@ int main(int argc, char* const argv[]) {
                     break;
                 case 'h':
                     showHelp(sorted);
+                    break;
+                case 'p':
+                    if (!isInteger(optarg)) {
+                        printf("\noption -%c requires an integer value\n", optopt);
+                        showHelp(sorted);
+                    }
+                    score = [[[NSString new] initWithUTF8String:optarg] intValue];
                     break;
                 case ':':
                     printf("\noption -%c requires an argument\n", optopt);
@@ -452,6 +489,22 @@ int main(int argc, char* const argv[]) {
             return 1;
         }
         
+        char answer;
+        printf("\nNVMeP try to produce a patched IONVMEFamily.kext (IONVMEFamilyBorg.kext):\n");
+        printf("this is an extreme hack and the use of the patched kext or the use of the\n");
+        printf("configSample.plist can potentially cause the corruption of the filesystem\n");
+        printf("or make your computer unbootable.\n");
+        printf("I'm not responsible for any kind of damages or loss of datas that may occur,\n");
+        printf("and by pressing \"Y\" (or \"y\") you assume all risks.\n");
+        printf("Also there's no guarantee it will work.\n");
+        printf("\nPress Y to agree and generate patched files:\n");
+        scanf(" %c", &answer);
+        answer = toupper(answer);
+        if (strcmp(&answer, "Y") != 0) {
+            printf("Anything done because you refused.\n");
+            return 1;
+        }
+        
         NSMutableArray *KTP;
         int count = 0;
         if (numPatch >= 0) {
@@ -461,7 +514,8 @@ int main(int argc, char* const argv[]) {
                 if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath
                                                        binPatch:KTP
                                            useExternalIconPatch:addExternalIconFix
-                                              useAppleClassCode:useOriginalClassCode]) {
+                                              useAppleClassCode:useOriginalClassCode
+                                                  setProbeScore:score]) {
                     count ++;
                     printf("\nSUCCESS!\n");
                     printf("%s successfully generated using %s patches!\n",
@@ -483,7 +537,8 @@ int main(int argc, char* const argv[]) {
                 if ([Patch_IONVMeFamily patchIONVMeFamilyAtPath:kextPath
                                                        binPatch:KTP
                                            useExternalIconPatch:addExternalIconFix
-                                              useAppleClassCode:useOriginalClassCode]) {
+                                              useAppleClassCode:useOriginalClassCode
+                                                  setProbeScore:score]) {
                     count ++;
                     printf("\nSUCCESS!\n");
                     printf("%s successfully generated using %s patches!\n", [patchedKextName UTF8String], patch.UTF8String);
