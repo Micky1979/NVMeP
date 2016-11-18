@@ -351,7 +351,7 @@ Creative Commons Notice
 
 // -----------------------------------------------------
 #define DEBUG_ME 0 // set to 1 to make the command works in Xcode
-#define cmdVersion @"2.7"
+#define cmdVersion @"2.8"
 #define headerString [NSString stringWithFormat:\
 @"NVMeP v%@ by Micky1979,\nprogram to patch IONVMeFamily.kext.\nPatches Author: Pike R.Alpha.\nContributors: Mork vom Ork and RehabMan\n\n",\
 cmdVersion]
@@ -500,7 +500,8 @@ int main(int argc, char* const argv[]) {
         printf("\nPress Y to agree and generate patched files:\n");
         scanf(" %c", &answer);
         answer = toupper(answer);
-        if (strcmp(&answer, "Y") != 0) {
+
+        if (![[NSString stringWithFormat:@"%c" , answer] isEqualToString:@"Y"]) {
             printf("Anything done because you refused.\n");
             return 1;
         }
